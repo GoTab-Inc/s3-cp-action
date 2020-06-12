@@ -10,7 +10,9 @@ aws_access_key_id = ${AWS_ACCESS_KEY_ID}
 aws_secret_access_key = ${AWS_SECRET_ACCESS_KEY}" > ~/.aws/credentials
 
 # Coalesce filename if there are wildcards in it (grabs first match).
-COALESCED_FILE=$(find ${SOURCE_PATH} -name "${FILE}" -type f -exec basename '{}' ';' | head -1)
+COALESCED_FILE=$(find ${SOURCE_PATH} -name "${FILE}" -type f -exec basename '{}' ';')
+
+echo "Coalesced file is: $COALESCED_FILE"
 
 (aws s3 ls s3://${AWS_S3_BUCKET}${DESTINATION_KEY}"$COALESCED_FILE") && \
      rm -rf ~/.aws && \
