@@ -25,7 +25,7 @@ jobs:
     steps:
     - uses: actions/checkout@master
     - name: Deploy
-      uses: airuleguy/s3-sync-action@master
+      uses: airuleguy/s3-cp-action@master
       env:
         FILE: artifact.jar
         AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
