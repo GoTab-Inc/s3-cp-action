@@ -1,0 +1,9 @@
+name: "S3 Copy with existence check"
+description: "Copy a file to an AWS S3 bucket, as long as the file does not already exist - Fork of jakejarvis/s3-sync-action"
+author: Alejandro Iruleguy <ale.iruleguy@gmail.com>
+runs:
+  using: docker
+  image: Dockerfile
+branding:
+  icon: copy
+  color: green
