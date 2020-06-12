@@ -11,26 +11,27 @@ This simple action uses the [vanilla AWS CLI](https://docs.aws.amazon.com/cli/in
 Place in a `.yml` file such as this one in your `.github/workflows` folder. [Refer to the documentation on workflow YAML syntax here.](https://help.github.com/en/articles/workflow-syntax-for-github-actions)
 
 ```
-name: Upload artifact
-on: push
+# This action will upload artifact to an S3 folder.
+name: Build & Deploy to S3
+
+on:
+  push:
+    branches:
+      - release/*
 
 jobs:
-  deploy:
+  delivery:
     runs-on: ubuntu-latest
-    
-  steps:
-  - uses: actions/checkout@master
-   
-  - name: Upload binary to S3 bucket
-  uses: airuleguy/s3-sync-action@master
-  with:
-    args: --acl public-read
-  env:
-    FILE: artifact-v1.2.3.jar
-    AWS_REGION: 'us-east-1'
-    AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
-    AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-    AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+    steps:
+    - uses: actions/checkout@master
+    - name: Deploy
+      uses: airuleguy/s3-sync-action@master
+      env:
+        FILE: artifact.jar
+        AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_REGION: 'us-east-1'
 ```
 
 
