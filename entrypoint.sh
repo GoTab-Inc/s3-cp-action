@@ -10,7 +10,7 @@ aws_secret_access_key = ${AWS_SECRET_ACCESS_KEY}" > ~/.aws/credentials
 
 echo "Excludes:  ${EXCLUDES}"
 
-rm -f artifacts.tar.gz
-tar -zcvf artifacts.tar.gz ${EXCLUDES} ${SOURCE_PATH}
+rm -f ${DESTINATION_FILE}
+tar -zcvf ${DESTINATION_FILE} ${EXCLUDES} ${SOURCE_PATH}
 
-aws s3 mv artifacts.tar.gz s3://${AWS_S3_BUCKET}${DESTINATION_KEY} --region ${AWS_REGION} --debug
+aws s3 mv ${DESTINATION_FILE} s3://${AWS_S3_BUCKET}${DESTINATION_KEY} --region ${AWS_REGION}
