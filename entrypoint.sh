@@ -11,4 +11,4 @@ aws_secret_access_key = ${AWS_SECRET_ACCESS_KEY}" > ~/.aws/credentials
 
 echo "Excludes:  ${EXCLUDES}"
 echo "Includes:  ${INCLUDES}"
-aws s3 sync ${SOURCE_PATH} s3://${AWS_S3_BUCKET}${DESTINATION_KEY} --region ${AWS_REGION} "${EXCLUDES}" "${INCLUDES}" --debug
+aws s3 sync ${SOURCE_PATH} s3://${AWS_S3_BUCKET}${DESTINATION_KEY} --region ${AWS_REGION} ${EXCLUDES} ${INCLUDES} --debug
